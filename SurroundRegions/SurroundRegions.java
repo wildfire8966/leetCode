@@ -35,10 +35,20 @@ public class SurroundRegions {
     private int row_num = 0;
     private int col_num = 0;
 
-    private ArrayList<Tuple> dirs = new ArrayList();
+    /**
+     * 相邻元素，上下左右
+     */
+    private ArrayList<Tuple> dirs = null;
+
+    /**
+     * 搜索队列（广度优先搜索）
+     */
+    private Queue<Tuple> que = null;
 
     public SurroundRegions() {
         super();
+        dirs = new ArrayList();
+        que = new LinkedList();
         dirs.add(new Tuple(1,0));
         dirs.add(new Tuple(-1,0));
         dirs.add(new Tuple(0,-1));
@@ -68,7 +78,6 @@ public class SurroundRegions {
     }
 
     private void traverseAndChange(String[][] matrix, int[][] flag, int x, int y) throws Exception {
-        Queue<Tuple> que = new LinkedList();
         Tuple cur_tuple = new Tuple(x, y);
         que.add(cur_tuple);
         flag[x][y] = 1;
